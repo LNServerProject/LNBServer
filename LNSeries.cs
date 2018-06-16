@@ -7,44 +7,59 @@ namespace LNBServer
 {
     public class LNSeries
     {
-        public enum BookStatus
+        public struct CachedStats
+        {
+            public decimal rating;
+
+            public uint timesRated;
+            public uint timesFavorited;
+            public uint timesCompleted;
+            public uint timesReading;
+            public uint timesDesired;
+            public uint timesDropped;
+            public uint timesOnHold;
+        }
+
+        public enum Status
         {
             ongoing,
+            hiatus,
             cancelled,
             completed
         }
 
-        public  List<LNVolume> volumes;
-        public  string         romanizedTitle;
-        public  string         englishTitle;
-        public  string[]       alternativeTitles;
-        public  string         japaneseDescription;
-        public  string         englishDescription;
-        public  string         officialWebsite;
-        public  List<string>   author;
-        public  List<string>   artist;
-        public  List<ushort>   tags;
-        public  List<ushort>   spoilerTags;
-        public  List<byte>     genres;
-        public  List<string>   publisher;
-        public  List<string>   publishingLabel;
-        public  DateTime       started;
-        public  DateTime       ended;
-        public  List<LNSeries> spinoffs;
-        public  List<LNSeries> prequels;
-        public  List<LNSeries> sequels;
-        public  BookStatus     status;
-        public  Image          cover;
-        public  decimal[]      overallRatings;
-        public  uint           overallRated;
-        public  uint           seriesRankingGlobal;
-        public  uint           seriesPopularityGlobal;    
-        public  uint           favorited;
-        public  uint           read;
-        public  uint           reading;
-        public  uint           wantToRead;
-        public  uint           dropped;
-        public  uint           onHold;
-        public  List<Review>   reviews;
+        public uint              id;
+        public List<LNVolume>    volumes;
+        public Title             title;
+        public LocalText         description;
+        public string            website;
+        public List<Author>      authors;
+        public List<Artist>      artists;
+        public List<ushort>      tags;
+        public List<ushort>      spoilerTags;
+        public List<byte>        genres;
+        public List<LNLabel>     labels;
+        public DateTime          started;
+        public DateTime?         ended;
+        public List<LNSeries>    spinoffs;
+        public List<LNSeries>    prequels;
+        public List<LNSeries>    sequels;
+        public Status            status;
+        public Image             cover;
+        public CachedStats       cachedStats;
+        public List<Review>      reviews;
+
+        public List<LNPublisher> publishers
+        {
+            get
+            {
+                var publishers = new List<LNPublisher>();
+                foreach (var label in labels)
+                {
+                    publishers.Add(label.publisher);
+                }
+                return publishers;
+            }
+        }
     }
 }

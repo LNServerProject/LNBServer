@@ -5,38 +5,39 @@ using System.Threading.Tasks;
 
 namespace LNBServer
 {
-    public struct LNVolume
+    public class LNVolume
     {
+        public struct CachedStats
+        {
+            public decimal rating;
+
+            public uint timesRated;
+            public uint timesFavorited;
+
+            public uint numCompleted;
+            public uint numReading;
+            public uint numOwned;   // "owned but not read"
+            public uint numDesired; // "want to read"
+        }
         public LNSeries     series;
-        public string       romanizedTitle;
-        public string       englishTitle;
-        public string       japaneseDescription;
-        public string       englishDescription;
+        public Title        title;
+        public LocalText    description;
         public ISBN         ISBN;
-        public string[]     author;
-        public string[]     artist;
+        public List<Author> authors;
+        public List<Artist> artists;
         public ushort[]     tags;
         public ushort[]     spoilertags;
-        public string       publisher;
-        public string       publishingLabel;
+        public LNLabel      label;
         public ushort       pages;
+        public byte         chapters;
         public BookType     bookType;
         public DateTime     releaseDate;
-        public DateTime     reprintDate;
+        public DateTime?    reprintDate;
         public Image        originalCover;
-        public Image[]      alternativeCovers;
+        public List<Image>  alternativeCovers;
         public string       amazonLink;
         public string       bookwalkerLink;
-        public decimal[]    ratings;
-        public uint         ratedBy;
-        public uint         volumeRankingInSeries;
-        public uint         volumePopularityInSeres;
-        public uint         volumePopularityGlobal;
-        public uint         volumeRankingGlobal;
-        public uint         timesFavorited;
-        public uint         read;
-        public uint         ownButNotRead;
-        public uint         wantToRead;
+        public CachedStats  cachedStats;
         public List<Review> reviews;
     }
 }
