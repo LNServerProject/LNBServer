@@ -8,13 +8,13 @@ namespace LNBServer
 
     public class ISBN
     {
-
         private string _isbn;
+        public string ISBN10 { get => _isbn; }
+        public bool IsValid { get => _isbn.Length != 0; }
 
         public ISBN(string isbn)
         {
             _isbn = isbn;
-
         }
 
         public static ISBN convert(string isbn)
@@ -32,6 +32,7 @@ namespace LNBServer
             {
                 sum += (relevantDigits[i] - '0') * (10 - i);
             }
+
             int lastDigit = 11 - (sum % 11);
 
             if (lastDigit == 10)
@@ -46,17 +47,9 @@ namespace LNBServer
             {
                 relevantDigits = relevantDigits + lastDigit.ToString();
             }
+
             return new ISBN(relevantDigits);
         }
-        public string getIsbn() {
-            return _isbn;
-        }
-
-        public bool IsValid
-        {
-            get { return _isbn.Length != 0; }
-        }
-
     }
 }
 
