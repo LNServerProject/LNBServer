@@ -16,7 +16,7 @@ namespace LNBServer
         public AmazonInfoScraper(ISBN isbn)
         {
             _isbn = isbn;
-            _url = "https://www.amazon.co.jp/dp/" + _isbn.getIsbn();
+            _url = "https://www.amazon.co.jp/dp/" + _isbn.ISBN10;
             _client = new HttpClient();
             _html = _client.GetStringAsync(_url).Result;
             
