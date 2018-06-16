@@ -7,24 +7,23 @@ namespace LNBServer
 {
     public class Creator
     {
-        protected string _japaneseName;
-        protected DateTime birthDate;
-        protected string _romanizedName;
+        private   Name           _name;
+        private   DateTime       _birthDate;
         protected List<LNSeries> _series;
 
-        
-
-
         public List<LNSeries> Series { get => _series; set => _series = value; }
-        protected string RomanizedName { get => _romanizedName; set => _romanizedName = value; }
-        protected string JapaneseName { get => _japaneseName; set => _japaneseName = value; }
+        public string RomanizedName { get => _name.Romanized; }
+        public string JapaneseName { get => _name.Japanese; }
+
+        public Creator(string japaneseName)
+        {
+            _name = new Name(japaneseName);
+            _birthDate = DateTime.MinValue;
+        }
 
         protected void addSeries(LNSeries series)
         {
             _series.Add(series);
         }
-
-        
-
     }
 }

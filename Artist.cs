@@ -7,11 +7,8 @@ namespace LNBServer
 {
     public class Artist : Creator
     {
-
-        public Artist(string japaneseName) : base()
+        public Artist(string japaneseName) : base(japaneseName)
         {
-            _japaneseName = japaneseName;
         }
-
     }
 }
