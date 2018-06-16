@@ -7,18 +7,7 @@ namespace LNBServer
 {
     public class Image
     {
-        private string _link;
-        private int _uniqueId;
-
-        public Image()
-        {
-          
-        }
-
-        public void setInternalLink(string link)
-        {
-            _link = link;  
-        }
-
+        public int    id;
+        public string link;
     }
 }
