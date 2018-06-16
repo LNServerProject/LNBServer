@@ -13,6 +13,8 @@ namespace LNBServer
         public List<LNLabel> labels;
     }
 
+
+    ///Magazines exist...
     public class LNLabel
     {
         public enum Type
@@ -22,7 +24,20 @@ namespace LNBServer
             general
         }
 
+        public enum Demographic
+        {
+            adult, 
+            shoujo,
+            josei,
+            shounen, 
+            seinen,
+            BL,
+            general
+
+        }
+
         public uint        id;
+        public bool        r18;
         public LNPublisher publisher;
         public string      name;
         public Type        type;

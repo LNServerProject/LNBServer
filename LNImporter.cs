@@ -7,7 +7,7 @@ namespace LNBServer
 {
     interface LNImporter
     {
-        void parse();
+        
 
         void saveToDatabase();
 
