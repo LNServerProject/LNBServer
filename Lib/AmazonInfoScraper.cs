@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace LNBServer
 {
+    using LNBServer.Models;
+
     public class AmazonInfoScraper
     {
         private ISBN _isbn;
