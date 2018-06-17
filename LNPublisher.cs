@@ -13,8 +13,8 @@ namespace LNBServer
         public List<LNLabel> labels;
     }
 
-
-    ///Magazines exist...
+    // Some LNs are serialized in magazines too. This shouldn't be much of an
+    // issue, but if we need to manage them this is probably where to do so.
     public class LNLabel
     {
         public enum Type
@@ -33,7 +33,6 @@ namespace LNBServer
             seinen,
             BL,
             general
-
         }
 
         public uint        id;
@@ -41,5 +40,6 @@ namespace LNBServer
         public LNPublisher publisher;
         public string      name;
         public Type        type;
+        public Demographic demographic;
     }
 }
