@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,14 +27,48 @@ namespace LNBServer
         english
     }
 
-    public struct LocalText
+    public class LocalTextEntry
     {
-        public Dictionary<TextLanguageType, string> entries;
+        public int              Id { get; set; }
+        public TextLanguageType Lang { get; set; }
+        public string           Text { get; set; }
+    }
 
-        private string getTextForLanguageOrEmptyString(TextLanguageType key) => entries.ContainsKey(key) ? entries[key] : "";
+    public class LocalText
+    {
+        public int                  Id { get; set; }
+        public List<LocalTextEntry> Entries { get; set; }
 
-        public string Japanese { get => getTextForLanguageOrEmptyString(TextLanguageType.japanese); }
-        public string English { get => getTextForLanguageOrEmptyString(TextLanguageType.english); }
+        private string getTextForLanguage(TextLanguageType key)
+        {
+            foreach (var entry in Entries)
+            {
+                if (entry.Lang == key)
+                {
+                    return entry.Text;
+                }
+            }
+
+            return "";
+        }
+        private void setTextForLanguage(TextLanguageType key, string text)
+        {
+            foreach(var entry in Entries)
+            {
+                if(entry.Lang == key)
+                {
+                    entry.Text = text;
+                    return;
+                }
+            }
+
+            Entries.Add(new LocalTextEntry { Lang = key, Text = text });
+        }
+
+        [NotMapped]
+        public string Japanese { get => getTextForLanguage(TextLanguageType.japanese); set => setTextForLanguage(TextLanguageType.japanese, value); }
+        [NotMapped]
+        public string English { get => getTextForLanguage(TextLanguageType.english); set => setTextForLanguage(TextLanguageType.english, value); }
     }
 
     public class Title : Name

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,56 +8,58 @@ namespace LNBServer.Models
 {
     public class LNSeries
     {
-        public struct CachedStats
+        /*
+        public struct CachedStatsType
         {
-            public decimal rating;
+            public decimal Rating;
 
-            public uint timesRated;
-            public uint timesFavorited;
-            public uint timesCompleted;
-            public uint timesReading;
-            public uint timesDesired;
-            public uint timesDropped;
-            public uint timesOnHold;
+            public int     TimesRated;
+            public int     TimesFavorited;
+            public int     TimesCompleted;
+            public int     TimesReading;
+            public int     TimesDesired;
+            public int     TimesDropped;
+            public int     TimesOnHold;
+        }
+        */
+
+        public enum StatusType
+        {
+            Ongoing,
+            Hiatus,
+            Cancelled,
+            Completed
         }
 
-        public enum Status
-        {
-            ongoing,
-            hiatus,
-            cancelled,
-            completed
-        }
+        [Key]
+        public int               Id { get; set; }
+        public List<LNVolume>    Volumes { get; set; }
+        public Title             Title { get; set; }
+        public LocalText         Description { get; set; }
+        public string            Website { get; set; }
+        public List<Author>      Authors { get; set; }
+        public List<Artist>      Artists { get; set; }
+        public List<Tag>         Tags { get; set; }
+        public List<Tag>         SpoilerTags { get; set; }
+        public List<LNLabel>     Labels { get; set; }
+        public DateTime          Started { get; set; }
+        public DateTime?         Ended { get; set; }
+        public List<LNSeries>    Spinoffs { get; set; }
+        public List<LNSeries>    Prequels { get; set; }
+        public List<LNSeries>    Sequels { get; set; }
+        public StatusType        Status { get; set; }
+        public Image             Cover { get; set; }
+        //public CachedStatsType   CachedStats { get; set; }
+        public List<Review>      Reviews { get; set; }
 
-        public uint              id;
-        public List<LNVolume>    volumes;
-        public Title             title;
-        public LocalText         description;
-        public string            website;
-        public List<Author>      authors;
-        public List<Artist>      artists;
-        public List<ushort>      tags;
-        public List<ushort>      spoilerTags;
-        public List<byte>        genres;
-        public List<LNLabel>     labels;
-        public DateTime          started;
-        public DateTime?         ended;
-        public List<LNSeries>    spinoffs;
-        public List<LNSeries>    prequels;
-        public List<LNSeries>    sequels;
-        public Status            status;
-        public Image             cover;
-        public CachedStats       cachedStats;
-        public List<Review>      reviews;
-
-        public List<LNPublisher> publishers
+        public List<LNPublisher> Publishers
         {
             get
             {
                 var publishers = new List<LNPublisher>();
-                foreach (var label in labels)
+                foreach (var label in Labels)
                 {
-                    publishers.Add(label.publisher);
+                    publishers.Add(label.Publisher);
                 }
                 return publishers;
             }
