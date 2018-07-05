@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace LNBServer.Models
 {
-    public class Image
+    public class Image : DbEntity
     {
-        [Key]
-        public int    Id;
         public string Link;
     }
 }

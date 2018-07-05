@@ -14,10 +14,8 @@ namespace LNBServer.Models
         Language,       // e.g., English
     }
 
-    public class Tag
+    public class Tag : DbEntity
     {
-        [Key]
-        public int     Id { get; set; }
         public TagType Type { get; set; }
         public string  Name { get; set; }
     }

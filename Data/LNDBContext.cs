@@ -28,10 +28,19 @@ namespace LNBServer.Data
             builder.Entity<LNLabel>()
                 .HasKey(x => x.Id);
 
+            // Arrays of strings aren't supported by EF, so need special trick
+            builder.Entity<LNSeries>()
+                .Property<string>("AssociatedTitlesCollection")
+                .HasField("_associatedTitles");
+
             // ISBN is just a number. Database is just a place.
             builder.Entity<LNVolume>()
                 .Property(e => e.ISBN)
                 .HasConversion(new CastingConverter<ISBN, int>());
+            // Same issue as with the associated titles in LNSeries
+            builder.Entity<LNVolume>()
+                .Property<string>("AssociatedTitlesCollection")
+                .HasField("_associatedTitles");
         }
     }
 }

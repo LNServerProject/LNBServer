@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LNBServer.Models
 {
-    public class LNSeries
+    public class LNSeries : DbEntity
     {
+        private static readonly string delimiter = "[:__:]";
         /*
         public struct CachedStatsType
         {
@@ -31,11 +33,20 @@ namespace LNBServer.Models
             Completed
         }
 
-        [Key]
-        public int               Id { get; set; }
+        private string _associatedTitles;
+
         public List<LNVolume>    Volumes { get; set; }
-        public Title             Title { get; set; }
-        public LocalText         Description { get; set; }
+        public string            JapaneseTitle { get; set; }
+        public string            RomajiTitle { get; set; }
+        public string            EnglishTitle { get; set; }
+        [NotMapped]
+        public string[] AssociatedTitles
+        {
+            get => _associatedTitles.Split(delimiter);
+            set => _associatedTitles = string.Join("${delimiter}", value);
+        }
+        public string            EnglishDescription { get; set; }
+        public string            JapaneseDescription { get; set; }
         public string            Website { get; set; }
         public List<Creator>     Authors { get; set; }
         public List<Creator>     Artists { get; set; }

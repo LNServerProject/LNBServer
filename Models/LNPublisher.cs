@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace LNBServer.Models
 {
-    public class LNPublisher
+    public class LNPublisher : DbEntity
     {
-        [Key]
-        public int           Id { get; set; }
-        public Name          Name { get; set; }
+        public string        JapaneseName { get; set; }
+        public string        RomajiName { get; set; }
         public string        Website { get; set; }
         public List<LNLabel> Labels { get; set; }
     }

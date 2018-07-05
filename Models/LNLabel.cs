@@ -26,10 +26,8 @@ namespace LNBServer.Models
 
     // Some LNs are serialized in magazines too. This shouldn't be much of an
     // issue, but if we need to manage them this is probably where to do so.
-    public class LNLabel
+    public class LNLabel : DbEntity
     {
-        [Key]
-        public int              Id { get; set; }
         public bool             R18 { get; set; }
         public LNPublisher      Publisher { get; set; }
         public string           Name { get; set; }

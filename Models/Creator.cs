@@ -8,11 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LNBServer.Models
 {
-    public class Creator
+    public class Creator : DbEntity
     {
-        [Key]
-        public int      Id { get; set; }
-
         public string   JapaneseName { get; set; }
         public string   RomanizedName { get; set; }
 
