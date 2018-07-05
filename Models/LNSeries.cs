@@ -37,8 +37,8 @@ namespace LNBServer.Models
         public Title             Title { get; set; }
         public LocalText         Description { get; set; }
         public string            Website { get; set; }
-        public List<Author>      Authors { get; set; }
-        public List<Artist>      Artists { get; set; }
+        public List<Creator>     Authors { get; set; }
+        public List<Creator>     Artists { get; set; }
         public List<Tag>         Tags { get; set; }
         public List<Tag>         SpoilerTags { get; set; }
         public List<LNLabel>     Labels { get; set; }

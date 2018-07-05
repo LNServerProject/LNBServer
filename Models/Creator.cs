@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LNBServer.Models
 {
     public class Creator
     {
-        public int            Id { get; set; }
-        public Name           Name { get; set; }
-        public DateTime       BirthDate { get; set; }
+        [Key]
+        public int      Id { get; set; }
 
-        public string RomanizedName { get => Name.Romanized; }
-        public string JapaneseName { get => Name.Japanese; }
+        public string   JapaneseName { get; set; }
+        public string   RomanizedName { get; set; }
 
-        public Creator(string japaneseName)
-        {
-            Name = new Name(japaneseName);
-            BirthDate = DateTime.MinValue;
-        }
+        public DateTime BirthDate { get; set; }
+
+        public string   AboutDescription { get; set; }
     }
 }

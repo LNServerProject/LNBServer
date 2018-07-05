@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LNBServer.Data
 {
@@ -26,6 +27,11 @@ namespace LNBServer.Data
             // Define composite key.
             builder.Entity<LNLabel>()
                 .HasKey(x => x.Id);
+
+            // ISBN is just a number. Database is just a place.
+            builder.Entity<LNVolume>()
+                .Property(e => e.ISBN)
+                .HasConversion(new CastingConverter<ISBN, int>());
         }
     }
 }

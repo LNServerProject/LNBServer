@@ -29,8 +29,8 @@ namespace LNBServer.Models
         public Title           Title { get; set; }
         public LocalText       Description { get; set; }
         public ISBN            ISBN { get; set; }
-        public List<Author>    Authors { get; set; }
-        public List<Artist>    Artists { get; set; }
+        public List<Creator>   Authors { get; set; }
+        public List<Creator>   Artists { get; set; }
         public List<Tag>       Tags { get; set; }
         public List<Tag>       SpoilerTags { get; set; }
         public LNLabel         Label { get; set; }
